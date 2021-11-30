@@ -1,3 +1,3 @@
 # Test repository
 
-This is a repostiory to test github actions workflows 
+This is a repository to test github actions workflows.
