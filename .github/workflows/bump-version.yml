@@ -27,7 +27,7 @@ jobs:
         run: echo "$COMMIT_MESSAGES"
       - name: has '#skip'
         if: contains(github.event.commits.*.message, '#skip')
-        run: echo 'do not tag'
+        run: exit 1
       - name: Bump version and push tag
         if: ${{ failure() }} && ${{ github.event_name == 'push' }}
         uses: anothrNick/github-tag-action@1.33.0
