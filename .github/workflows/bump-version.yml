@@ -11,6 +11,7 @@ on:
 jobs:
   tag_release:
     runs-on: ubuntu-18.04
+    if: ${{ github.event_name == 'push' }}
     steps:
       - uses: actions/checkout@v2
       - name: gihub context
@@ -25,11 +26,8 @@ jobs:
         env:
           COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
         run: echo "$COMMIT_MESSAGES"
-      - name: has '#skip'
-        if: contains(github.event.commits.*.message, '#skip')
-        run: exit 1
       - name: Bump version and push tag
-        if: ${{ failure() }} && ${{ github.event_name == 'push' }}
+        if: "!contains(github.event.commits.*.message, '#skip')"
         uses: anothrNick/github-tag-action@1.33.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
