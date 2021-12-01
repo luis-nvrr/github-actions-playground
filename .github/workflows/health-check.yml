@@ -15,4 +15,3 @@ jobs:
         url: https://luisnvrr-pokedex.herokuapp.com
         max-attempts: 2
         retry-delay: 5s
-        retry-all: no
